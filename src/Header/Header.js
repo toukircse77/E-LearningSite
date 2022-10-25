@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Registation = () => {
+const Header = () => {
     return (
         <div>
-            
+            <h1>im header</h1>
         </div>
     );
 };
 
-export default Registation;
+export default Header;
