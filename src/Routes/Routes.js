@@ -3,6 +3,7 @@ import ErrorElement from "../ErrorElement/ErrorElement";
 import Main from "../Lauout/Main";
 import Blog from "../Pages/Blog/Blog";
 import Catagories from "../Pages/Courses/Catagories/Catagories";
+import CheckOut from "../Pages/Courses/CheckOut/CheckOut";
 import CourseDetails from "../Pages/Courses/CourseDetails/CourseDetails";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -19,12 +20,18 @@ export const routes = createBrowserRouter([
                 element:<Home></Home>,
             },
             {
+                path:'/home',
+                element:<Home></Home>,
+            },
+            {
                 path:'/catagories',
                 element:<Catagories></Catagories>,
             },
             {
-                path:'/courseDetails/:id',
-                element:<CourseDetails></CourseDetails>,
+                path:'/catagory/:id',
+                element:<CheckOut></CheckOut>,
+                loader: ({params}) => fetch(`http://localhost:5000/catagory/${params.id}`)
+                
             },
             {
                 path:'/blog',
