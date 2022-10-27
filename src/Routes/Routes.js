@@ -8,6 +8,8 @@ import Block from "../Components/Block";
 import Login from '../Login-Register/Login';
 import Register from '../Login-Register/Register';
 import CheckOut from '../Pages/Courses/CheckOut/CheckOut';
+import PrivateRoute from "../Private-Route/PrivateRoute";
+import FAQ from "../Components/FAQ";
 
  export const router = createBrowserRouter([
     {
@@ -37,6 +39,10 @@ import CheckOut from '../Pages/Courses/CheckOut/CheckOut';
                 element:<Login></Login>
             },
             {
+                path:'/faq',
+                element:<FAQ></FAQ>
+            },
+            {
                 path:'/registration',
                 element:<Register></Register>
             },
@@ -45,8 +51,8 @@ import CheckOut from '../Pages/Courses/CheckOut/CheckOut';
                 element:<Course_Details></Course_Details>
             },
             {
-                path:'/checkOut',
-                element:<CheckOut></CheckOut>
+                path:'/checkout',
+                element:<PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             }
 
         ]

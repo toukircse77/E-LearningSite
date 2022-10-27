@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { FaDownload, FaJsSquare, IconName } from "react-icons/fa";
+
 
 const Course_Details = () => {
     const data=useLoaderData();
@@ -21,7 +21,7 @@ const Course_Details = () => {
            <div className=" p-2 bg-yellow-300 rounded-2xl">Fees : ${price}</div>
             </div>
             <div>
-              <Link to='/checkOut'><button className='bg-blue-600 text-white px-5 py-3 rounded-2xl'>Get Premiun Access</button></Link>
+              <Link to='/checkout'><button className='bg-blue-600 text-white px-5 py-3 rounded-2xl'>Get Premiun Access</button></Link>
             </div>
           </div>
          </div>

@@ -31,6 +31,7 @@ const Navbar = () => {
                 <ul tabIndex={0} className="lg-header hiside menu menu-compact dropdown-content  p-2  shadow bg-slate-700  rounded-box w-60  lg:hidden">
                     <Link to='/' className='btn mx-6'>Home</Link>
                     <Link to='/courses' className='btn'> Courses</Link>
+                    <Link to='/faq' className='btn'>FAQ</Link>
                     <Link to='/block' className='btn mx-6'>Block</Link>
                 </ul>
             </div>
@@ -52,7 +53,8 @@ const Navbar = () => {
 
                 <ul className="lg-header menu menu-horizontal p-0">
                     <Link to='/' className='btn mx-6'>Home</Link>
-                    <Link to='courses' className='btn'>Courses</Link>
+                    <Link to='/courses' className='btn'>Courses</Link>
+                    <Link to='/faq' className='btn'>FAQ</Link>
                     <Link to='/block' className='btn ml-5'>Block</Link>
 
                     <label htmlFor="Toggle1" className="inline-flex ml-5 items-center space-x-4 cursor-pointer dark:text-gray-100">
@@ -70,13 +72,16 @@ const Navbar = () => {
                 </ul>
             </div>
             <ul className="lg-header menu menu-horizontal p-0">
-            
-                    <Link to='/' onClick={logOutBtn} id='logout' className='btn mx-4'>Log out</Link>
-                
-                        <Link to='/registration' className='btn ml-3 mr-2 lg:mx-5'>Registrar</Link>
-                            <Link to='/login' className='btn mr-3'>Login</Link>
-                
-            </ul>
+                    {
+                        user?.uid ?
+                            <Link to='/' onClick={logOutBtn} id='logout' className='btn mx-4'>Log out</Link>
+                            :
+                            <>
+                                <Link to='/registration' className='btn ml-3 mr-2 lg:mx-5'>Registrar</Link>
+                                 <Link to='/login' className='btn mr-3'>Login</Link>
+                            </>
+                    }
+                    </ul>
 
             {
                 user?.uid ? <>{user.displayName}</> : <>"mokhles"</>
