@@ -28,7 +28,7 @@ import FAQ from "../Components/FAQ";
             {
                 path:'/catagory/:id',
                 element:<Course_Details></Course_Details>,
-                loader: ({params}) => fetch(`http://localhost:5000/catagory/${params.id}`)
+                loader: ({params}) => fetch(`https://serversite.vercel.app/catagory/${params.id}`)
             },
             {
                 path:'/block',

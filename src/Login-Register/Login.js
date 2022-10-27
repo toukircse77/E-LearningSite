@@ -9,9 +9,9 @@ const Login = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-    const navigat = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
-    const froms= location?.state?.from?.pathname || '/';
+    const from= location?.state?.from?.pathname || '/';
     const handleLogIn = (event) =>{
         event.preventDefault()
         const password = event.target.Password.value;
@@ -19,7 +19,7 @@ const Login = () => {
         
         userSingInWithEmailPassword(email,password)
         .then(result =>{
-            navigat(froms, {replace: true})
+            navigate(from, {replace: true})
         }).catch(error => console.error(error))
 
         setTimeout(() => {
@@ -37,17 +37,21 @@ const Login = () => {
             googleLogIn()
             .then(result =>{
                 console.log('login successfull')
-                navigat(froms, {replace: true})
+                navigate(from, {replace: true})
             }).catch(error => console.error(error)) 
             }
             const githuBtnLogIN = () => {
                 gitHubLogIn()
                     .then(result => {
-                        navigat(froms, { replace: true })
+                        navigate(from, { replace: true })
                     }).catch(error => console.log(error))
     }
     
-
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true })
+        }
+    }, [user])
     return (
         <div className='flex justify-center items-center pt-8 mx-5'>
         <div className='flex flex-col max-w-md px-6 py-2 rounded-md sm:p-10 bg-gray-100 text-gray-900'>

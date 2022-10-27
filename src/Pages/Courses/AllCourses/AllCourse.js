@@ -5,7 +5,7 @@ import CourseCard from '../AllCourses/CourseCard';
 const AllCourse = () => {
     const [courses , setCourses] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/catagories')
+        fetch('https://serversite.vercel.app/catagories')
             .then(res => res.json())
             .then(data => setCourses(data));
     },[])
