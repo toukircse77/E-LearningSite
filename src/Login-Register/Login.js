@@ -1,8 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { AuthContext } from '../Context/AuthProvider';
 
 const Login = () => {
+    const {googleLogIn, userSingInWithEmailPassword, gitHubLogIn, user} = useContext(AuthContext);
+
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+
+    const navigat = useNavigate();
+    const location = useLocation();
+    const froms= location?.state?.from?.pathname || '/';
+    const handleLogIn = (event) =>{
+        event.preventDefault()
+        const password = event.target.Password.value;
+        const email = event.target.email.value;
+        
+        userSingInWithEmailPassword(email,password)
+        .then(result =>{
+            navigat(froms, {replace: true})
+        }).catch(error => console.error(error))
+
+        setTimeout(() => {
+            if(!password){
+                return setSuccess("Your Login successfully")
+            }
+            else{
+                return setError("you give the wrong password !")
+            }
+        }, 500);
+        
+        }
+
+        const googleBtnLogin = () =>{
+            googleLogIn()
+            .then(result =>{
+                console.log('login successfull')
+                navigat(froms, {replace: true})
+            }).catch(error => console.error(error)) 
+            }
+            const githuBtnLogIN = () => {
+                gitHubLogIn()
+                    .then(result => {
+                        navigat(froms, { replace: true })
+                    }).catch(error => console.log(error))
+    }
+    
+
     return (
         <div className='flex justify-center items-center pt-8 mx-5'>
         <div className='flex flex-col max-w-md px-6 py-2 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -10,6 +55,7 @@ const Login = () => {
                 <h1 className='my-3 text-4xl font-bold'><span className='text-amber-700'>Sing in</span></h1>
             </div>
             <form 
+                onSubmit={handleLogIn}
                 noValidate=''
                 action=''
                 className='space-y-2 ng-untouched ng-pristine ng-valid'
@@ -45,7 +91,7 @@ const Login = () => {
                     </div>
                 </div>
 
-                <p className='text-center text-red-400 text-sm pb-1'></p><p className='text-center text-green-500 text-xs pb-1'>{ }</p>
+                <p className='text-center text-red-500 text-sm pb-1'></p>{error}<p className='text-center text-green-500 text-xs pb-1'>{success}</p>
 
                 <div>
                     <button
@@ -71,11 +117,11 @@ const Login = () => {
             </div>
             <div className='flex justify-center space-x-4'>
 
-                <button  aria-label='Log in with Google' className='p-3 rounded-sm'>
+                <button onClick={googleBtnLogin} aria-label='Log in with Google' className='p-3 rounded-sm'>
                     <h1 className='text-2xl'><FaGoogle></FaGoogle></h1>
                 </button>
 
-                <button aria-label='Log in with GitHub' className='p-3 rounded-sm'>
+                <button onClick={githuBtnLogIN} aria-label='Log in with GitHub' className='p-3 rounded-sm'>
                     <h1 className='text-2xl'><FaGithub></FaGithub></h1>
                 </button>
             </div>
